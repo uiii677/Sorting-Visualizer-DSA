@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting & Searching Visualizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="brand">
+            <h1>Sorting & Searching Visualizer</h1>
+        </div>
+        <div class="theme-toggle">
+            <input type="checkbox" id="themeSwitch">
+            <label for="themeSwitch">🌙 Dark Mode</label>
+        </div>
+    </header>
+
+    <main class="grid">
+        <aside class="controls">
+            <!-- Array Controls -->
+            <div class="control-group">
+                <h3>Array Controls</h3>
+                <div class="control-row">
+                    <label for="sizeSlider">Size</label>
+                    <input type="range" id="sizeSlider" min="5" max="50" value="25">
+                    <span id="sizeValue">25</span>
+                </div>
+                <div class="control-row">
+                    <label for="speedSlider">Speed</label>
+                    <input type="range" id="speedSlider" min="1" max="1000" value="200">
+                    <span id="speedValue">200ms</span>
+                </div>
+                <button id="generateBtn" class="secondary">Generate New Array</button>
+            </div>
+
+            <!-- Sorting Controls -->
+            <div class="control-group">
+                <h3>Sorting Algorithms</h3>
+                <div class="control-row">
+                    <label for="algorithmSelect">Algorithm</label>
+                    <select id="algorithmSelect">
+                        <option value="bubble">Bubble Sort</option>
+                        <option value="selection">Selection Sort</option>
+                        <option value="insertion">Insertion Sort</option>
+                        <option value="merge">Merge Sort</option>
+                        <option value="quick">Quick Sort</option>
+                        <option value="heap">Heap Sort</option>
+                        <option value="radix">Radix Sort</option>
+                    </select>
+                </div>
+                <div class="actions">
+                    <button id="visualizeBtn">Visualize</button>
+                    <button id="pauseBtn" class="secondary" disabled>Pause</button>
+                    <button id="resetBtn" class="ghost">Reset</button>
+                </div>
+            </div>
+
+            <!-- Search Controls -->
+            <div class="control-group">
+                <h3>Binary Search</h3>
+                <div class="control-row">
+                    <label for="searchTarget">Target Value</label>
+                    <input type="number" id="searchTarget" placeholder="e.g. 42">
+                </div>
+                <button id="searchBtn" class="secondary">Search</button>
+            </div>
+            
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat">
+                    <span>Comparisons</span>
+                    <strong id="comparisons">0</strong>
+                </div>
+                <div class="stat">
+                    <span>Swaps</span>
+                    <strong id="swaps">0</strong>
+                </div>
+                <div class="stat">
+                    <span>Array Access</span>
+                    <strong id="access">0</strong>
+                </div>
+            </div>
+        </aside>
+
+        <section class="canvas">
+            <div id="bars" class="bars"></div>
+            <div class="status" id="status">Ready</div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
