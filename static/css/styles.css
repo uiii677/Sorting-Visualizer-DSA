@@ -1,0 +1,95 @@
+/* CSS: Glassmorphism + gradient accents */
+:root {
+  --bg: #0b1020;
+  --card: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.12);
+  --text: #e7eefb;
+  --muted: #a6b3d0;
+  --accent-1: #00C2FF;
+  --accent-2: #7D2AE8;
+  --good: #00d084;
+  --bad: #ff5a5f;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background: radial-gradient(1000px 500px at 10% 0%, #0b1a38 0%, var(--bg) 60%),
+              radial-gradient(800px 400px at 100% 0%, #1a1035 0%, var(--bg) 70%);
+}
+
+.app-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 0.2px; }
+.brand h1 { font-size: 1.5rem; margin: 0; }
+.theme-toggle label { cursor: pointer; }
+
+.grid { display: grid; grid-template-columns: 340px 1fr; gap: 20px; padding: 20px; }
+.controls {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.control-group h3 { margin-top: 0; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+.control-row { display: grid; grid-template-columns: 100px 1fr auto; align-items: center; gap: 10px; margin-bottom: 12px; }
+.control-row label { color: var(--muted); }
+.control-row input[type="text"], .control-row input[type="number"], .control-row select {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+.control-row input[type="range"] { cursor: pointer; }
+
+.actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+button { border: 0; border-radius: 12px; padding: 10px 12px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+button:hover { transform: translateY(-2px); filter: brightness(1.1); }
+button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+button#visualizeBtn { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); color: white; }
+button.secondary { background: rgba(255,255,255,0.12); color: var(--text); }
+button.ghost { background: transparent; color: var(--muted); border: 1px dashed var(--border); }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: auto; }
+.stat { background: rgba(255,255,255,0.08); border: 1px solid var(--border); padding: 10px; border-radius: 12px; text-align: center; }
+.stat span { color: var(--muted); font-size: 12px; display: block; }
+.stat strong { font-size: 16px; }
+
+.canvas {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 10px 10px 30px;
+  position: relative;
+}
+.status { position: absolute; bottom: 8px; right: 12px; color: var(--muted); font-size: 12px; }
+
+.bars { display: flex; align-items: flex-end; justify-content: center; gap: 2px; height: calc(80vh - 140px); padding: 10px; }
+.bar { width: 100%; max-width: 40px; background: linear-gradient(180deg, var(--accent-1), var(--accent-2)); border-radius: 6px 6px 0 0; transition: height 0.12s ease, transform 0.12s ease, background 0.3s ease; }
+.bar.compare { background: linear-gradient(180deg, #ffd166, #ef476f); }
+.bar.swap { background: linear-gradient(180deg, #06d6a0, #118ab2); transform: scale(1.02); }
+.bar.sorted { background: linear-gradient(180deg, var(--good), #06d6a0); }
+
+/* Search visualization classes */
+.bar.searching { background: linear-gradient(180deg, #ffd166, #f4a261); } /* For low/high pointers */
+.bar.pivot { background: linear-gradient(180deg, #e76f51, #e63946); } /* For mid pointer */
+.bar.found { background: linear-gradient(180deg, var(--good), #2a9d8f); animation: pulse 0.5s ease-in-out; }
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .grid { grid-template-columns: 1fr; }
+  .bars { height: 50vh; }
+}
